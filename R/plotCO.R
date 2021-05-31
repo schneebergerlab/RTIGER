@@ -25,8 +25,15 @@ calcCOnumber = function(object){
       return(COs)
     })
   })
+  if(!is.matrix(numCO)){
+    # print(numCO)
+    # TODO: Add check to ensure that this throws an error when different chromosomes are present in different samples
+    chr <- strsplit(names(numCO)[1], '\\.')[[1]][2]
+    numCO <- matrix(numCO, byrow = FALSE, nrow = 1)
+    colnames(numCO) <- names(object2@Viterbi)
+    rownames(numCO) <- chr
+  }
   return(numCO)
-
 }
 
 #'

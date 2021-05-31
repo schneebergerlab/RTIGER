@@ -136,7 +136,7 @@ RTIGER = function(expDesign,
     }
 
 
-
+    # return(myDat)
     # Plotting CO number per chormosome
     if(verbose) cat("PLotting CO number per chromosome. \n")
     myf = file.path(outputdir, "COs-per-Chromosome.pdf")

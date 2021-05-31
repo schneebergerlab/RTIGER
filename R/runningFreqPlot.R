@@ -19,7 +19,7 @@ running.freq = function(x, tiles = 4e5, info){
 
 # tiles = 4e5
 plotFreqgen = function(myx, tiles, file, groups = NULL, info, verbose = TRUE){
-  if(sum(c("Gviz") %in% rownames(installed.packages())) != 2) stop("To generate this plot you need to have installed Gviz Bioconductor package.\n
+  if(sum(c("Gviz") %in% rownames(installed.packages())) < 1) stop("To generate this plot you need to have installed Gviz Bioconductor package.\n
                                                                    https://bioconductor.org/packages/release/bioc/html/Gviz.html")
 
   if(verbose) cat("Plotting Gen frequencies.\n")
