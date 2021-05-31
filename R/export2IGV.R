@@ -46,9 +46,12 @@ export2IGV = function( object, sample, dir = NULL, ratio = FALSE, newn = NULL){
     return(myx)
   })
   gr = mycomp[[1]]
-  for(i in 2:length(mycomp)){
-    gr = c(gr,mycomp[[i]])
+  if(length(mycomp)>1){
+    for(i in 2:length(mycomp)){
+      gr = c(gr,mycomp[[i]])
+    }
   }
+  
   goodanno = c("AA", "AB", "BB")
   names(goodanno) = c("pat", "het", "mat")
   df <- data.frame(seqnames=seqnames(gr),
