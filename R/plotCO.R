@@ -30,7 +30,7 @@ calcCOnumber = function(object){
     # TODO: Add check to ensure that this throws an error when different chromosomes are present in different samples
     chr <- strsplit(names(numCO)[1], '\\.')[[1]][2]
     numCO <- matrix(numCO, byrow = FALSE, nrow = 1)
-    colnames(numCO) <- names(object2@Viterbi)
+    colnames(numCO) <- names(object@Viterbi)
     rownames(numCO) <- chr
   }
   return(numCO)
