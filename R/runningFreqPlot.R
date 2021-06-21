@@ -91,6 +91,5 @@ plotFreqgen = function(myx, tiles, file, groups = NULL, info, verbose = TRUE){
   }
   # cat("IS her the proble?")
   #
-  # cat("Yes it fucking is!")
 }
 
