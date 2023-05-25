@@ -8,6 +8,10 @@
 #' @param seqlengths a named vector with the chromosome lenghts of the organism that the user is working with.
 #' @param eps the threshold of the difference between the parameters value between the previous and actuay iteration to stope de EM algorithm.
 #' @param max.iter maximum number of iterations of the EM algorithm before to stop in case that eps has not been achieved.
+#' @param  autotune Logical value if the R-value should be tuned by our algorithm. This will take longer as it needs a first training with the rigidity value provided by the user and then the optimization step is carried. Finally, a training using the optimum R will be performed and results for the optimum R will be returned.
+#' @param max_rigidity If autotune true, R values will be explored up the value given in this parameter. Default = 2^9
+#' @param average_coverage If autotune true, for conservative results set it to the lowest average coverage of a sample in your experiment, or evne to the lowest average coverage in a (sufficiently large) region in one of your samples. The lower the value, the more conservative (higher) our estimates of the false positive segments rates. If it is not provided it will be computed as the average of all data points.
+#' @param crossovers_per_megabase If autotune true,  for conservative results set it to the highest ratio of a sample in your experiment. The higher the value, the more conservative (higher) our estimates of the false positive segments rates. If it is not provided it will be computed as the average of all samples.
 #' @param trace logical value. Whether or not to keep track of the parameters for the HMM along the iterations. Deafault FALSE
 #' @param tiles length of the tiles by which the genome will be segmented in order to compute the ratio of COs in the complete dataset.
 #' @param all logical value. Whether to use the complete data set to fit the rHMM. default TRUE.
@@ -21,9 +25,11 @@
 #'
 #' @return RTIGER object
 #' @usage RTIGER(expDesign, rigidity=NULL, outputdir=NULL, nstates = 3,
-#' seqlengths = NULL, eps=0.01, max.iter=50, trace = FALSE,
+#' seqlengths = NULL, eps=0.01, max.iter=50, autotune = FALSE,
+#' max_rigidity = 2^9, average_coverage = NULL,
+#' crossovers_per_megabase = NULL, trace = FALSE,
 #' tiles = 4e5, all = TRUE, random = FALSE, specific = FALSE,
-#' nsamples = 20, post.processing = TRUE, save.results = FALSE, verbose = TRUE)
+#' nsamples = 20, post.processing = TRUE, save.results = TRUE, verbose = TRUE)
 #'
 #' @examples
 #'\dontrun{
@@ -40,7 +46,7 @@
 #'                rigidity = 4,
 #'                max.iter = 2,
 #'                trace = FALSE,
-#'                save.results = FALSE)
+#'                save.results = TRUE)
 #'}
 #'
 #' @export RTIGER
@@ -53,15 +59,18 @@ RTIGER = function(expDesign,
                   seqlengths = NULL,
                   eps=0.01,
                   max.iter=50,
+                  autotune = FALSE,
+                  max_rigidity = 2^9,
+                  average_coverage = NULL,
+                  crossovers_per_megabase = NULL,
                   trace = FALSE,
                   tiles = 4e5,
-                  # groups = NULL,
                   all = TRUE,
                   random = FALSE,
                   specific = FALSE,
                   nsamples = 20,
                   post.processing = TRUE,
-                  save.results = FALSE,
+                  save.results = TRUE,
                   verbose = TRUE){
   # Checks
   if(any(seqlengths < tiles)) stop("Your tiling distance is larger than some of your chromosomes. Reduce the tiling parameter.\n")
@@ -77,6 +86,11 @@ RTIGER = function(expDesign,
     #                                                                                 Currently you are missing them.")
     requireNamespace("Gviz")
     requireNamespace("rtracklayer")
+  }
+  post_post.processing = post.processing
+  if(autotune){
+    post_post.processing = post.processing
+    post.processing = FALSE
   }
 
   # Load data
@@ -95,7 +109,9 @@ RTIGER = function(expDesign,
 
   # Fit and decode
   if(verbose) cat("\n\nFitting the parameters and Viterbi decoding. \n")
-  if(verbose) cat("post processing value is:", post.processing,"\n")
+  if(verbose) cat("post processing value is:", post_post.processing,"\n")
+  if(verbose) cat("R value autotune is:", autotune,"\n")
+  if(autotune & verbose) cat("Fitting an RTIGER object with the R provided by the user.\n")
   myDat = fit(rtigerobj = myDat,
               max.iter = max.iter,
               eps = eps,
@@ -106,6 +122,24 @@ RTIGER = function(expDesign,
               nsamples = nsamples,
               post.processing = post.processing
               )
+  if(autotune){
+    if(verbose) cat("Optimizing the R parameter.\n")
+    opt_R = optimize_R(myDat, max_rigidity = max_rigidity, average_coverage = average_coverage,
+                       crossovers_per_megabase = crossovers_per_megabase)
+    if(verbose) cat("Best R value:", opt_R,"\n")
+    myDat@params$rigidity = as.integer(opt_R)
+    myDat = fit(rtigerobj = myDat,
+                max.iter = max.iter,
+                eps = eps,
+                trace = trace,
+                all = all,
+                random = random,
+                specific = specific,
+                nsamples = nsamples,
+                post.processing = post_post.processing
+    )
+
+  }
   if(all(info$sample_names == expDesign$name)) info$sample_names = expDesign$OName
   myDat@info$expDesign = expDesign
 
@@ -144,21 +178,24 @@ RTIGER = function(expDesign,
 
     # Plotting CO number per Sample
     cos = calcCOnumber(myDat)
+    cos = colSums(cos)
     cos = melt(cos)
     rev.newn = myDat@info$expDesign$OName
     names(rev.newn) = myDat@info$expDesign$name
-    colnames(cos) = c("Chr", "Sample", "COs")
-    cos$Sample = rev.newn[cos$Sample]
+    cos$Sample = rev.newn[rownames(cos)]
+    colnames(cos) = c( "COs", "Sample")
     myf = file.path(outputdir, "CO-count-perSample.pdf")
     pdf(myf)
 
     p <- ggplot(data=cos, aes(x=Sample, y=COs)) +
       geom_bar(stat="identity") +
+      # geom_bar() +
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
       ylab("Number of COs")+
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-            panel.background = element_blank(), axis.line = element_line(colour = "black"))
-    # barplot(colSums(calcCOnumber(myDat)), las = 2)
+            panel.background = element_blank(), axis.line = element_line(colour = "black"),
+            axis.text.y = element_text(angle = 45))+
+      coord_flip()
     print(p)
     dev.off()
 
@@ -210,14 +247,14 @@ RTIGER = function(expDesign,
         }
 
         if(length(hetrat) > 0){
-          hist(hetrat, probability =   TRUE, col = rgb( 0.744,0.34,0.844,0.25), main = "P1 homozygous states", xlab = "Allele ratio", xlim = c(0,100))
+          hist(hetrat, probability =   TRUE, col = rgb( 0.744,0.34,0.844,0.25), main = "Heterozygous states", xlab = "Allele ratio", xlim = c(0,100))
           points(x,y[,"het"],type="l",col=ecolors[2])
           legend("topleft",c( "Fitted Heterozygous\n distribution"),
                  lty = 1, col = c( "violet"), cex = .7)
         }
 
         if(length(matrat) > 0){
-          hist(matrat, probability = TRUE, col = rgb(0,0,1,0.25), main = "P1 homozygous states", xlab = "Allele ratio", xlim = c(0,100))
+          hist(matrat, probability = TRUE, col = rgb(0,0,1,0.25), main = "P2 homozygous states", xlab = "Allele ratio", xlim = c(0,100))
           points(x,y[,"mat"],type="l",col=ecolors[3])
           legend("topleft",c("Fitted P2 distribution"),
                  lty = 1, col = c("blue"), cex = .7)

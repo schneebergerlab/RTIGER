@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="99b487ab-8bf5-4c8f-b042-f17bb6f36acf" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="ProjectId" id="1uFwrEXEWCyVEwQLbm0aybn2dmV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="R" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="99b487ab-8bf5-4c8f-b042-f17bb6f36acf" name="Default Changelist" comment="" />
+      <created>1624274842060</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1624274842060</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Added changes from Sophia, fixing initialisation errors.">
+      <created>1624276185469</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1624276185469</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added changes from Sophia, fixing initialisation errors." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added changes from Sophia, fixing initialisation errors." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="418" y="185" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1624275321104">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="418" y="185" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624275321104" />
+    <state x="571" y="119" width="773" height="811" key="CommitChangelistDialog2" timestamp="1624276185168">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="571" y="119" width="773" height="811" key="CommitChangelistDialog2/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624276185168" />
+    <state x="179" y="187" width="1542" height="868" key="DiffContextDialog" timestamp="1624277653521">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="179" y="187" width="1542" height="868" key="DiffContextDialog/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624277653521" />
+    <state x="740" y="269" width="430" height="504" key="FileChooserDialogImpl" timestamp="1624275052330">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="740" y="269" width="430" height="504" key="FileChooserDialogImpl/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624275052330" />
+    <state x="185" y="88" width="1542" height="868" key="MergeDialog" timestamp="1624275718600">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="185" y="88" width="1542" height="868" key="MergeDialog/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624275718600" />
+    <state x="594" y="293" width="727" height="463" key="MultipleFileMergeDialog" timestamp="1624275721884">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="594" y="293" width="727" height="463" key="MultipleFileMergeDialog/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624275721884" />
+    <state x="464" y="162" key="SettingsEditor" timestamp="1624276682185">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="464" y="162" key="SettingsEditor/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624276682185" />
+    <state x="97" y="98" width="1726" height="859" key="ShowDiffWithBranchDialog" timestamp="1624278751536">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="97" y="98" width="1726" height="859" key="ShowDiffWithBranchDialog/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624278751536" />
+    <state x="705" y="159" width="606" height="471" key="Vcs.Multiple.Commit.Info.Dialog.Key" timestamp="1624275710143">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="705" y="159" width="606" height="471" key="Vcs.Multiple.Commit.Info.Dialog.Key/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624275710143" />
+    <state x="555" y="263" width="806" height="522" key="Vcs.Push.Dialog.v2" timestamp="1624276208696">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="555" y="263" width="806" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624276208696" />
+    <state x="743" y="445" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1624275475427">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="743" y="445" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624275475427" />
+    <state x="656" y="320" width="603" height="408" key="git4idea.merge.GitPullDialog" timestamp="1624275505838">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="656" y="320" width="603" height="408" key="git4idea.merge.GitPullDialog/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624275505838" />
+    <state x="740" y="432" width="435" height="185" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1624275471801">
+      <screen x="0" y="0" width="1920" height="1055" />
+    </state>
+    <state x="740" y="432" width="435" height="185" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1055/1920.0.1050.1680@0.0.1920.1055" timestamp="1624275471801" />
+  </component>
+</project>
